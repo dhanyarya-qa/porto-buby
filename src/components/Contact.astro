@@ -1,0 +1,21 @@
+---
+import { contact, profile } from '../lib/content';
+import CvButton from './CvButton.astro';
+---
+<section id="contact" class="band !border-t-2 !border-solid !border-primary" aria-labelledby="contact-title">
+  <div class="container-page grid gap-8 md:grid-cols-[1fr_auto] md:items-end" data-reveal>
+    <div>
+      <h2 id="contact-title" class="section-title">Contact</h2>
+      <ul class="mt-6 grid gap-3 text-lg">
+        {contact.email && (
+          <li><a href={`mailto:${contact.email}`} class="link break-all font-semibold" data-event="contact_email">{contact.email}</a></li>
+        )}
+        {contact.linkedin && (
+          <li><a href={contact.linkedin} target="_blank" rel="noopener" class="link font-semibold" data-event="contact_linkedin">LinkedIn</a></li>
+        )}
+      </ul>
+    </div>
+    <CvButton />
+  </div>
+  <p class="container-page mt-16 text-sm text-mute">© {new Date().getFullYear()} {profile.name}</p>
+</section>

@@ -1,0 +1,39 @@
+---
+import { profile, experience } from '../lib/content';
+import CvButton from './CvButton.astro';
+
+const initials = profile.name.split(/\s+/).map((w) => w[0]).slice(0, 2).join('');
+const awarded = experience.find((e) => e.award);
+---
+<section id="top" class="relative overflow-hidden" data-parallax>
+  <div class="grid-floor" aria-hidden="true"><div></div></div>
+  <div class="container-page relative grid items-center gap-7 pb-14 pt-7 md:grid-cols-[1.35fr_1fr] md:gap-10 md:py-24 lg:min-h-[calc(100svh-3.5rem)] lg:py-16">
+    <div class="md:order-last md:justify-self-center">
+      <div class="scene w-44 sm:w-52 md:w-64 lg:w-80">
+        <div class="scene-pointer">
+          <div class="scene-bob">
+            <span class="ghost ghost-2" aria-hidden="true"></span>
+            <span class="ghost ghost-1" aria-hidden="true"></span>
+            <div class="photo-card">
+              {profile.photo ? (
+                <img src={profile.photo} alt={profile.name} width="400" height="400" fetchpriority="high" class="block aspect-square w-full rounded-[8px] object-cover" />
+              ) : (
+                <div class="flex aspect-square items-center justify-center rounded-[8px] bg-canvas-soft text-5xl text-ink" role="img" aria-label={profile.name}>{initials}</div>
+              )}
+            </div>
+            {awarded && <span class="float-chip pill pill-status text-xs md:text-sm">{awarded.award} · {awarded.company}</span>}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="prose-width">
+      <p class="eyebrow hero-in" style="--i: 1">{profile.role}</p>
+      <h1 class="hero-in mt-3 text-[34px] leading-[1.08] tracking-[-0.65px] sm:text-[42px] md:text-[52px] lg:text-[60px] lg:leading-[60px]" style="--i: 2">{profile.name}</h1>
+      <p class="hero-in mt-5 text-lg leading-7 text-body" style="--i: 3">{profile.valueProposition}</p>
+      <div class="hero-in mt-8 flex flex-wrap gap-3" style="--i: 4">
+        <CvButton />
+        <a href="#contact" class="btn btn-outline">Contact me</a>
+      </div>
+    </div>
+  </div>
+</section>

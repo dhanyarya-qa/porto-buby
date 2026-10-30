@@ -1,0 +1,30 @@
+---
+import { getEntry } from 'astro:content';
+import { experience } from '../lib/content';
+
+const entry = await getEntry('caseStudies', 'mepo');
+const href = experience.find((e) => e.caseStudy)?.caseStudy;
+const ready = entry?.data.status === 'ready' && !/^TODO\b/.test(entry.data.title);
+---
+{entry && (
+  <section id="case-study" class="band" aria-labelledby="case-study-title">
+    <div class="container-page">
+      <p class="eyebrow" data-reveal>Featured case study</p>
+      <div class="page-stack mt-4 mr-5 mb-5" data-reveal style="--i: 1">
+        <div class="card card-emphasized grid gap-6 md:grid-cols-[1fr_auto] md:items-end md:p-10" data-tilt>
+          <div class="prose-width pop">
+            <h2 id="case-study-title" class="section-title">
+              {ready ? entry.data.title : `${entry.data.role}, ${entry.data.company}`}
+            </h2>
+            <p class="mt-3 font-mono text-[13px] text-mute">{entry.data.company} · {entry.data.period}</p>
+          </div>
+          {ready && href ? (
+            <a href={href} class="btn btn-primary pop" data-event="case_study_open">Read the case study</a>
+          ) : (
+            <span class="pill pop justify-self-start text-mute">Coming soon</span>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+)}

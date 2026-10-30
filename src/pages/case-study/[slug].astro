@@ -1,0 +1,35 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { profile } from '../../lib/content';
+
+// Only case studies marked ready get a page (CLAUDE.md); drafts produce no route.
+export async function getStaticPaths() {
+  const entries = await getCollection('caseStudies', (e) => e.data.status === 'ready');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<Base title={`${entry.data.title} — ${profile.name}`} description={`${entry.data.role}, ${entry.data.company} · ${entry.data.period}`}>
+  <article class="container-page band">
+    <a href="/#case-study" class="link text-sm font-semibold">← {profile.name}</a>
+    <p class="eyebrow mt-8">{entry.data.role} · {entry.data.company} · {entry.data.period}</p>
+    <h1 class="prose-width mt-3 text-[32px] leading-[1.1] tracking-[-0.65px] md:text-[48px]">{entry.data.title}</h1>
+    <div class="case-study prose-width mt-10 space-y-4 text-lg text-body [&_h2]:mt-12 [&_h2]:text-[28px] [&_h2]:text-ink-strong [&_a]:text-primary-deep [&_ul]:list-disc [&_ul]:pl-5 [&_img]:rounded-xl">
+      <Content />
+    </div>
+  </article>
+  <script>
+    import { track } from '@vercel/analytics';
+    // case_study_scroll_75: fire once when 75% of the page has been scrolled.
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      if (max <= 0 || scrollY / max >= 0.75) {
+        track('case_study_scroll_75');
+        removeEventListener('scroll', onScroll);
+      }
+    };
+    addEventListener('scroll', onScroll, { passive: true });
+  </script>
+</Base>

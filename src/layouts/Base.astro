@@ -1,0 +1,108 @@
+---
+import Analytics from '@vercel/analytics/astro';
+import '../styles/global.css';
+import { profile } from '../lib/content';
+import Nav from '../components/Nav.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title = `${profile.name} — ${profile.role}`, description = profile.valueProposition } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = profile.photo ? new URL(profile.photo, Astro.site).href : null;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#101010" />
+    <script is:inline>document.documentElement.classList.add('js')</script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='4' y='4' width='24' height='24' rx='6' fill='%2300d992'/></svg>" />
+  </head>
+  <body>
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[500] btn btn-primary">Skip to content</a>
+    <Nav />
+    <main id="main"><slot /></main>
+    <Analytics />
+    <script>
+      import { track } from '@vercel/analytics';
+      // Any element with data-event="<name>" sends that event on click (R8).
+      document.addEventListener('click', (e) => {
+        const el = (e.target as Element).closest<HTMLElement>('[data-event]');
+        if (el?.dataset.event) track(el.dataset.event);
+      });
+
+      const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Scroll reveal: [data-reveal] gets .is-in once it enters the viewport.
+      const revealIo = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (!e.isIntersecting) continue;
+            e.target.classList.add('is-in');
+            revealIo.unobserve(e.target);
+          }
+        },
+        { rootMargin: '0px 0px -4% 0px' },
+      );
+      document.querySelectorAll('[data-reveal]').forEach((el) => revealIo.observe(el));
+
+      // Nav: mark the section in view, close the mobile menu after a jump.
+      const navLinks = document.querySelectorAll<HTMLAnchorElement>('[data-nav] a[href^="/#"]');
+      const navIo = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (!e.isIntersecting) continue;
+            navLinks.forEach((a) => (a.hash === `#${e.target.id}` ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current')));
+          }
+        },
+        { rootMargin: '-45% 0px -50% 0px' },
+      );
+      document.querySelectorAll('main section[id]').forEach((s) => navIo.observe(s));
+      document.querySelector('[data-nav] details')?.addEventListener('click', (e) => {
+        if ((e.target as Element).closest('a')) (e.currentTarget as HTMLDetailsElement).open = false;
+      });
+
+      // 3D tilt + spotlight on cards and hero parallax: mouse/trackpad only.
+      if (!reduceMotion && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        const MAX_DEG = 8;
+        for (const el of document.querySelectorAll<HTMLElement>('[data-tilt]')) {
+          el.addEventListener('pointermove', (e) => {
+            const r = el.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width;
+            const y = (e.clientY - r.top) / r.height;
+            el.style.setProperty('--ry', `${(x - 0.5) * MAX_DEG}deg`);
+            el.style.setProperty('--rx', `${-(y - 0.5) * MAX_DEG}deg`);
+            el.style.setProperty('--mx', `${x * 100}%`);
+            el.style.setProperty('--my', `${y * 100}%`);
+          });
+          el.addEventListener('pointerleave', () => {
+            el.style.removeProperty('--rx');
+            el.style.removeProperty('--ry');
+          });
+        }
+        const hero = document.querySelector<HTMLElement>('[data-parallax]');
+        hero?.addEventListener('pointermove', (e) => {
+          const r = hero.getBoundingClientRect();
+          hero.style.setProperty('--px', ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
+          hero.style.setProperty('--py', ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
+        });
+        hero?.addEventListener('pointerleave', () => {
+          hero.style.removeProperty('--px');
+          hero.style.removeProperty('--py');
+        });
+      }
+    </script>
+  </body>
+</html>

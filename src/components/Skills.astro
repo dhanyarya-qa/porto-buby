@@ -1,0 +1,26 @@
+---
+import { skills, resolveEvidence } from '../lib/content';
+---
+<section id="skills" class="band" aria-labelledby="skills-title">
+  <div class="container-page">
+    <h2 id="skills-title" class="section-title" data-reveal>Skills</h2>
+    <ul class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {skills.map((s, i) => (
+        <li class="card flex flex-col" style={`--i: ${i % 3}`} data-tilt data-reveal>
+          <h3 class="card-title pop">{s.group}</h3>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {s.items.map((item) => <li class="pill hover:border-primary/50">{item}</li>)}
+          </ul>
+          <p class="eyebrow mt-6 !text-xs">Evidence</p>
+          <ul class="mt-1 space-y-1 text-sm">
+            {s.evidence.map(resolveEvidence).filter((e) => e !== null).map((e) => (
+              <li>
+                <a href={e.href} class="link" {...(e.external ? { target: '_blank', rel: 'noopener' } : {})}>{e.label}</a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

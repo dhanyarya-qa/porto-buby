@@ -1,0 +1,11 @@
+---
+import { profile } from '../lib/content';
+interface Props { variant?: 'primary' | 'outline'; size?: 'md' | 'sm' }
+const { variant = 'primary', size = 'md' } = Astro.props;
+---
+{profile.cv && (
+  <a href={profile.cv} download class:list={['btn', `btn-${variant}`, size === 'sm' && 'btn-sm']} data-event="cv_download">
+    <svg aria-hidden="true" width={size === 'sm' ? 16 : 18} height={size === 'sm' ? 16 : 18} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3m0 12-4-4m4 4 4-4M2 17l.6 2.4A2 2 0 0 0 4.5 21h15a2 2 0 0 0 1.9-1.6L22 17"/></svg>
+    Download CV
+  </a>
+)}

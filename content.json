@@ -1,0 +1,280 @@
+{
+  "_meta": {
+    "source": "LinkedIn profile linkedin.com/in/silfi-ardila-putri-5028ba380, copied 2026-10-30",
+    "rule": "Single source of truth for the website. Do not hardcode profile content in components. Values marked TODO must be filled by Silfi before release."
+  },
+  "profile": {
+    "name": "Silfi Ardila Putri",
+    "role": "Product Manager",
+    "roleNote": "Open question: 'Product Manager' or 'Junior Product Manager' (LinkedIn headline uses 'Junior Product Manager'). Confirm before release.",
+    "headline": "Junior Product Manager | PM Intern @ Mepo (Best Award) | Product Strategy · Product Discovery · Requirements & PRD · Business Analysis · Data-Driven (SQL) · AI/LLM Tools | Informatics @ Universitas Gunadarma",
+    "valueProposition": "Product Manager with a QA and engineering foundation, turning user problems into clear, measurable product solutions.",
+    "location": "Depok, West Java, Indonesia",
+    "education": {
+      "school": "Universitas Gunadarma",
+      "program": "Informatics (Faculty of Industrial Technology)"
+    },
+    "photo": "/images/profile.jpg",
+    "photoNote": "TODO: add a high-resolution profile photo at public/images/profile.jpg",
+    "cv": "/cv/Silfi-Ardila-Putri-CV.pdf",
+    "cvNote": "TODO: add the latest CV (PDF, max 1 MB) at public/cv/Silfi-Ardila-Putri-CV.pdf"
+  },
+  "contact": {
+    "email": "silfiardila96@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/silfi-ardila-putri-5028ba380"
+  },
+  "highlights": [
+    {
+      "label": "Product Manager Intern",
+      "detail": "Mepo Indonesia, Mar – Oct 2026",
+      "evidence": "experience:mepo-pm-intern"
+    },
+    {
+      "label": "Best Award",
+      "detail": "Recognized at the end of the Mepo PM internship",
+      "evidence": "certificate:mepo-pm-intern"
+    },
+    {
+      "label": "QA + Engineering + AI foundation",
+      "detail": "QA Engineer at Mepo, SQL & web development, LLM / Gemini API",
+      "evidence": "skills"
+    }
+  ],
+  "about": [
+    "Product Manager with hands-on experience as a Product Manager Intern at Mepo (PT. Multi Kreasi Travel Indo), where I was recognized with the Best Award. I focus on turning user problems into clear, measurable product solutions.",
+    "At Mepo (March – October 2026), I defined product requirements, translated user needs into clear specifications, and drove feature development through cross-functional collaboration with engineering and stakeholders, always with a user-centric approach to improving the experience.",
+    "What I enjoy most about product management is the full loop: understanding who the users are, defining the problem worth solving, prioritizing what to build, and measuring whether it actually worked."
+  ],
+  "experience": [
+    {
+      "id": "mepo-pm-intern",
+      "title": "Product Manager Intern",
+      "company": "Mepo Indonesia",
+      "legalEntity": "PT. Multi Kreasi Travel Indo",
+      "type": "Internship",
+      "start": "2026-03",
+      "end": "2026-10",
+      "location": null,
+      "points": [
+        "Defined product requirements and translated user needs into clear specifications for the team",
+        "Drove feature development through cross-functional collaboration with engineering and stakeholders",
+        "Applied a user-centric approach to deliver solutions that improve the user experience"
+      ],
+      "award": "Best Award",
+      "certificate": "/certificates/mepo-product-manager-intern-certificate.pdf",
+      "caseStudy": "/case-study/mepo"
+    },
+    {
+      "id": "mepo-qa-engineer",
+      "title": "Quality Assurance Engineer",
+      "company": "Mepo Indonesia",
+      "type": null,
+      "start": "2025-12",
+      "end": "2026-03",
+      "location": "East Jakarta, Jakarta · Hybrid",
+      "points": [
+        "Validated REST APIs using Swagger UI and Postman, checking endpoints, request parameters, response structures, HTTP status codes, authentication, and error handling",
+        "Conducted User Acceptance Testing (UAT) to confirm features met business requirements before release",
+        "Logged and tracked defects in JIRA with reproduction steps, expected vs actual results, and supporting evidence, coordinating with developers on resolution",
+        "Performed manual testing on new and existing features of the travel platform to maintain system stability and functionality",
+        "Monitored API responses and network activity with Chrome DevTools (Network tab) to trace issues between frontend and backend",
+        "Designed and maintained test cases and test scenarios to ensure adequate coverage for newly developed features",
+        "Ran regression testing on new builds before deployment to confirm existing features remained stable",
+        "Verified frontend slicing implementations against product requirements to ensure correct UI behavior",
+        "Collaborated with developers and product teams in Agile workflows, including daily stand-up meetings"
+      ],
+      "pointsSource": "CV (public/cv/Silfi-Ardila-Putri-CV.pdf), copied verbatim; first 3 are shown, the rest behind 'Show all'"
+    },
+    {
+      "id": "akatrust-web-intern",
+      "title": "Junior Web Programmer Intern",
+      "company": "AKATRUST",
+      "type": "Internship",
+      "start": "2022-01",
+      "end": "2022-04",
+      "location": "Padang, West Sumatra · On-site",
+      "points": [
+        "Supported the development of web application features as part of the development team in an on-site internship",
+        "Wrote and maintained code for web pages and application modules under the guidance of senior developers",
+        "Tested and fixed issues in assigned features before handing them over for review"
+      ],
+      "pointsSource": "CV (public/cv/Silfi-Ardila-Putri-CV.pdf), copied verbatim"
+    }
+  ],
+  "skills": [
+    {
+      "group": "Product",
+      "items": [
+        "Product requirements & PRD",
+        "Feature prioritization",
+        "Cross-functional collaboration",
+        "User-centric design",
+        "Business analysis",
+        "Product strategy"
+      ],
+      "evidence": [
+        "experience:mepo-pm-intern",
+        "certificate:dibimbing-ba-product-strategy",
+        "certificate:myskill-project-management"
+      ]
+    },
+    {
+      "group": "Quality",
+      "items": [
+        "Software testing",
+        "Quality assurance"
+      ],
+      "evidence": [
+        "experience:mepo-qa-engineer"
+      ]
+    },
+    {
+      "group": "Data",
+      "items": [
+        "SQL Server",
+        "MySQL",
+        "Query optimization",
+        "Stored procedures"
+      ],
+      "evidence": [
+        "certificate:gunadarma-fundamental-dbms",
+        "certificate:gunadarma-sql-server-intermediate"
+      ]
+    },
+    {
+      "group": "Engineering",
+      "items": [
+        "C# / ASP.NET",
+        "Web API",
+        "JavaScript",
+        "Application design"
+      ],
+      "evidence": [
+        "experience:akatrust-web-intern",
+        "certificate:gunadarma-csharp-intermediate",
+        "certificate:gunadarma-javascript-fundamental",
+        "certificate:gunadarma-application-development-design"
+      ]
+    },
+    {
+      "group": "AI",
+      "items": [
+        "LLM-based tools",
+        "Gemini API integration"
+      ],
+      "evidence": [
+        "certificate:hacktiv8-llm-gemini-api"
+      ]
+    }
+  ],
+  "certificates": [
+    {
+      "id": "mepo-pm-intern",
+      "group": "Product",
+      "title": "Certificate of Internship – Product Manager Intern (Best Award)",
+      "issuer": "Mepo (PT. Multi Kreasi Travel Indo)",
+      "issued": "2026-10",
+      "credentialId": null,
+      "file": "/certificates/mepo-product-manager-intern-certificate.pdf"
+    },
+    {
+      "id": "dibimbing-ba-product-strategy",
+      "group": "Product",
+      "title": "Business Analyst & Product Strategy (Online Event)",
+      "issuer": "Dibimbing",
+      "issued": "2026-10",
+      "credentialId": null,
+      "file": "/certificates/dibimbing-business-analyst-product-strategy.pdf"
+    },
+    {
+      "id": "myskill-project-management",
+      "group": "Product",
+      "title": "Introduction to Project Management (Short Class – Product Management)",
+      "issuer": "MySkill",
+      "issued": "2026-10",
+      "credentialId": "350385/PDM/LM/10/2026",
+      "file": "/certificates/myskill-introduction-to-project-management.pdf"
+    },
+    {
+      "id": "hacktiv8-llm-gemini-api",
+      "group": "AI",
+      "title": "LLM-Based Tools & Gemini API Integration for Data Scientists (Maju Bareng AI)",
+      "issuer": "Hacktiv8 Indonesia",
+      "issued": "2026-05",
+      "credentialId": "03733/H8/CSR/MBA2/V/2026",
+      "file": "/certificates/hacktiv8-llm-gemini-api.pdf"
+    },
+    {
+      "id": "gunadarma-application-implementation-development",
+      "group": "Technical",
+      "title": "Application Implementation and Development",
+      "issuer": "Universitas Gunadarma",
+      "issued": "2026-06",
+      "credentialId": "872062",
+      "file": "/certificates/gunadarma-application-implementation-development.pdf"
+    },
+    {
+      "id": "gunadarma-javascript-fundamental",
+      "group": "Technical",
+      "title": "JavaScript Programming Language Fundamental",
+      "issuer": "Universitas Gunadarma",
+      "issued": "2026-01",
+      "credentialId": "314756",
+      "file": "/certificates/gunadarma-javascript-fundamental.pdf"
+    },
+    {
+      "id": "gunadarma-application-development-design",
+      "group": "Technical",
+      "title": "Application Development Design",
+      "issuer": "Universitas Gunadarma",
+      "issued": "2025-09",
+      "credentialId": "597029",
+      "file": "/certificates/gunadarma-application-development-design.pdf"
+    },
+    {
+      "id": "gunadarma-csharp-intermediate",
+      "group": "Technical",
+      "title": "C# for Intermediate",
+      "issuer": "Universitas Gunadarma",
+      "issued": "2025-08",
+      "credentialId": "421038",
+      "file": "/certificates/gunadarma-csharp-intermediate.pdf"
+    },
+    {
+      "id": "gunadarma-sql-server-intermediate",
+      "group": "Technical",
+      "title": "SQL Server for Intermediate",
+      "issuer": "Universitas Gunadarma",
+      "issued": "2025-02",
+      "credentialId": "061632",
+      "file": "/certificates/gunadarma-sql-server-intermediate.pdf"
+    },
+    {
+      "id": "gunadarma-csharp-beginner",
+      "group": "Technical",
+      "title": "C# for Beginner",
+      "issuer": "Universitas Gunadarma",
+      "issued": "2024-08",
+      "credentialId": "542529",
+      "file": "/certificates/gunadarma-csharp-beginner.pdf"
+    },
+    {
+      "id": "gunadarma-fundamental-web-programming",
+      "group": "Technical",
+      "title": "Fundamental Web Programming",
+      "issuer": "Universitas Gunadarma",
+      "issued": "2023-08",
+      "credentialId": "229758",
+      "file": "/certificates/gunadarma-fundamental-web-programming.pdf"
+    },
+    {
+      "id": "gunadarma-fundamental-dbms",
+      "group": "Technical",
+      "title": "Fundamental DBMS",
+      "issuer": "Universitas Gunadarma",
+      "issued": "2023-02",
+      "credentialId": "776262",
+      "file": "/certificates/gunadarma-fundamental-dbms.pdf"
+    }
+  ]
+}

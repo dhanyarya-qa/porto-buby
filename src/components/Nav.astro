@@ -1,0 +1,41 @@
+---
+import { getEntry } from 'astro:content';
+import { profile } from '../lib/content';
+import CvButton from './CvButton.astro';
+
+const hasCaseStudy = Boolean(await getEntry('caseStudies', 'mepo'));
+const links = [
+  ['highlights', 'Highlights'],
+  ...(hasCaseStudy ? [['case-study', 'Case study']] : []),
+  ['experience', 'Experience'],
+  ['skills', 'Skills'],
+  ['contact', 'Contact'],
+];
+---
+<header class="sticky top-0 z-[100] border-b border-hairline bg-canvas/95" data-nav>
+  <div class="container-page flex h-14 items-center justify-between gap-4">
+    <a href="/#top" class="whitespace-nowrap font-semibold tracking-tight text-ink-strong no-underline">{profile.name}</a>
+    <nav aria-label="Sections" class="hidden items-center gap-6 whitespace-nowrap lg:flex">
+      {links.map(([id, label]) => <a href={`/#${id}`} class="nav-link">{label}</a>)}
+      <CvButton size="sm" />
+    </nav>
+    <details class="relative lg:hidden">
+      <summary class="btn btn-outline btn-sm list-none [&::-webkit-details-marker]:hidden" aria-label="Menu">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </summary>
+      <nav aria-label="Sections" class="absolute right-0 top-12 grid w-56 gap-1 rounded-[8px] border border-hairline bg-canvas p-3">
+        {links.map(([id, label]) => <a href={`/#${id}`} class="nav-link rounded-[6px] px-3 py-2">{label}</a>)}
+        <div class="mt-2"><CvButton size="sm" /></div>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<style>
+  .nav-link { color: var(--body); font-size: 14px; text-decoration: none; transition: color 0.2s; position: relative; }
+  .nav-link:hover, .nav-link[aria-current] { color: var(--ink-strong); }
+  @media (min-width: 1024px) {
+    .nav-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: -18px; height: 2px; background: var(--primary); scale: 0 1; transition: scale 0.3s var(--ease); }
+    .nav-link[aria-current]::after { scale: 1 1; }
+  }
+</style>

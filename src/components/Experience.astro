@@ -1,0 +1,76 @@
+---
+import { experience, formatMonth, caseStudyReady, type Experience } from '../lib/content';
+
+const VISIBLE_POINTS = 3; // R4: 2–3 points up front, the rest behind "Show all"
+
+// Group consecutive roles by company so the Mepo QA → PM progression reads as one story (R4).
+const groups = experience.reduce<{ company: string; roles: Experience[] }[]>((acc, e) => {
+  const last = acc.at(-1);
+  if (last?.company === e.company) last.roles.push(e);
+  else acc.push({ company: e.company, roles: [e] });
+  return acc;
+}, []);
+---
+<section id="experience" class="band" aria-labelledby="experience-title">
+  <div class="container-page">
+    <h2 id="experience-title" class="section-title" data-reveal>Experience</h2>
+    <ol class="mt-8 grid gap-12">
+      {groups.map((g, gi) => {
+        const legal = g.roles.find((r) => r.legalEntity)?.legalEntity;
+        return (
+          <li class="grid gap-5 md:grid-cols-[14rem_1fr] md:gap-10 lg:grid-cols-[16rem_1fr] lg:gap-12">
+            <div class="md:sticky md:top-24 md:self-start" data-reveal>
+              <h3 class="card-title">{g.company}</h3>
+              {legal && <p class="text-sm text-mute">{legal}</p>}
+              {g.roles.length > 1 && (
+                <p class="mt-3 flex flex-wrap items-center gap-2 text-sm">
+                  {[...g.roles].reverse().map((r, i) => (
+                    <>
+                      {i > 0 && <span aria-hidden="true" class="text-mute">→</span>}
+                      <span class="pill">{r.title}</span>
+                    </>
+                  ))}
+                </p>
+              )}
+            </div>
+            <ol class="timeline grid gap-8" data-reveal style="--i: 1">
+              {g.roles.map((r, i) => (
+                <li id={`exp-${r.id}`} class="relative scroll-mt-8">
+                  <span class:list={['dot', gi === 0 && i === 0 && 'dot-live']} aria-hidden="true" />
+                  <h4 class="text-lg font-semibold">{r.title}</h4>
+                  <p class="mt-1 font-mono text-[13px] text-mute">
+                    <time datetime={r.start}>{formatMonth(r.start)}</time> – {r.end ? <time datetime={r.end}>{formatMonth(r.end)}</time> : 'Present'}
+                    {r.type && <> · {r.type}</>}
+                    {r.location && <> · {r.location}</>}
+                  </p>
+                  {r.award && <p class="pill pill-status mt-3">{r.award}</p>}
+                  {r.points.length > 0 && (
+                    <ul class="prose-width mt-3 list-disc space-y-1.5 pl-5 text-body marker:text-mute">
+                      {r.points.slice(0, VISIBLE_POINTS).map((p) => <li>{p}</li>)}
+                    </ul>
+                  )}
+                  {r.points.length > VISIBLE_POINTS && (
+                    <details class="prose-width group mt-2">
+                      <summary class="cursor-pointer text-sm font-semibold text-primary-soft">
+                        <span class="group-open:hidden">Show all {r.points.length}</span><span class="hidden group-open:inline">Show less</span>
+                      </summary>
+                      <ul class="mt-2 list-disc space-y-1.5 pl-5 text-body marker:text-mute">
+                        {r.points.slice(VISIBLE_POINTS).map((p) => <li>{p}</li>)}
+                      </ul>
+                    </details>
+                  )}
+                  {(r.certificate || (r.caseStudy && caseStudyReady)) && (
+                    <p class="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm font-semibold">
+                      {r.certificate && <a href={r.certificate} target="_blank" rel="noopener" class="link">Certificate (PDF)</a>}
+                      {r.caseStudy && caseStudyReady && <a href={r.caseStudy} class="link" data-event="case_study_open">Case study</a>}
+                    </p>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </li>
+        );
+      })}
+    </ol>
+  </div>
+</section>
